@@ -6,6 +6,14 @@ use Laravel\Nova\Fields\Field;
 
 class ActionButtons extends Field
 {
+    public $showOnIndex = true;
+
+    public $showOnDetail = false;
+
+    public $showOnCreation = false;
+    
+    public $showOnUpdate = false;
+
     /**
      * The field's component.
      *
