@@ -245,9 +245,28 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 
 /* harmony default export */ __webpack_exports__["default"] = ({
-    props: ['resourceName', 'field']
+  props: ["resourceName", "field"],
+  computed: {
+    resource: function resource() {
+      return this.$parent.resource;
+    },
+    actions: function actions() {
+      return this.resource.actions;
+    }
+  }
 });
 
 /***/ }),
@@ -258,7 +277,37 @@ var render = function() {
   var _vm = this
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
-  return _c("span", [_vm._v(_vm._s(_vm.field.value))])
+  return _vm.actions.length > 0
+    ? _c(
+        "div",
+        _vm._l(_vm.actions, function(action) {
+          return _c(
+            "div",
+            { staticClass: "my-2" },
+            [
+              _c("inline-action-selector", {
+                staticClass: "mr-3",
+                attrs: {
+                  resource: _vm.resource,
+                  "resource-name": _vm.resourceName,
+                  actions: [
+                    Object.assign({}, action, { class: "btn btn-primary" })
+                  ],
+                  endpoint: _vm.actionsEndpoint
+                },
+                on: {
+                  actionExecuted: function($event) {
+                    return _vm.$parent.$emit("actionExecuted")
+                  }
+                }
+              })
+            ],
+            1
+          )
+        }),
+        0
+      )
+    : _vm._e()
 }
 var staticRenderFns = []
 render._withStripped = true
